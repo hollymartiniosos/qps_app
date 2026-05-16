@@ -1,0 +1,240 @@
+QPS App – Test Log
+==================
+Run time : 2026-05-15 14:12:37 
+R version : R version 4.5.1 (2025-06-13 ucrt) 
+
+✔ | F W  S  OK | Context
+
+⠏ |          0 | 01-hierarchy                                                   
+⠋ |          1 | 01-hierarchy                                                   
+⠹ |         13 | 01-hierarchy                                                   
+✔ |         20 | 01-hierarchy
+
+⠏ |          0 | 02-data-load                                                   
+⠙ |          2 | 02-data-load                                                   
+⠹ |          3 | 02-data-load                                                   
+⠸ |          4 | 02-data-load                                                   
+⠴ |          6 | 02-data-load                                                   
+⠦ |          7 | 02-data-load                                                   
+⠧ |          8 | 02-data-load                                                   
+⠇ |          9 | 02-data-load                                                   
+⠏ |         10 | 02-data-load                                                   
+⠋ |         11 | 02-data-load                                                   
+⠹ |         13 | 02-data-load                                                   
+⠸ |         14 | 02-data-load                                                   
+⠼ |         15 | 02-data-load                                                   
+⠴ |         16 | 02-data-load                                                   
+⠦ |         17 | 02-data-load                                                   
+⠧ |         18 | 02-data-load                                                   
+⠏ |         20 | 02-data-load                                                   
+⠋ |         21 | 02-data-load                                                   
+⠙ |         22 | 02-data-load                                                   
+⠹ |         23 | 02-data-load                                                   
+⠸ |         24 | 02-data-load                                                   
+⠼ |         25 | 02-data-load                                                   
+⠦ |         27 | 02-data-load                                                   
+⠧ |         28 | 02-data-load                                                   
+⠇ |         29 | 02-data-load                                                   
+⠏ |         30 | 02-data-load                                                   
+⠋ |         31 | 02-data-load                                                   
+⠙ |         32 | 02-data-load                                                   
+⠸ |         34 | 02-data-load                                                   
+⠼ |         35 | 02-data-load                                                   
+⠴ |         36 | 02-data-load                                                   
+⠦ |         37 | 02-data-load                                                   
+⠧ |         38 | 02-data-load                                                   
+⠇ |         39 | 02-data-load                                                   
+⠋ |         41 | 02-data-load                                                   
+⠙ |         42 | 02-data-load                                                   
+⠹ |         43 | 02-data-load                                                   
+⠸ |         44 | 02-data-load                                                   
+⠼ |         45 | 02-data-load                                                   
+⠴ |         46 | 02-data-load                                                   
+⠧ |         48 | 02-data-load                                                   
+⠇ |         49 | 02-data-load                                                   
+⠏ |         50 | 02-data-load                                                   
+⠋ |         51 | 02-data-load                                                   
+⠙ |         52 | 02-data-load                                                   
+⠹ |         53 | 02-data-load                                                   
+⠼ |         55 | 02-data-load                                                   
+⠴ |         56 | 02-data-load                                                   
+⠦ |         57 | 02-data-load                                                   
+⠧ |         58 | 02-data-load                                                   
+⠇ |         59 | 02-data-load                                                   
+⠏ |         60 | 02-data-load                                                   
+⠙ |         62 | 02-data-load                                                   
+⠹ |         63 | 02-data-load                                                   
+⠸ |         64 | 02-data-load                                                   
+⠼ |         65 | 02-data-load                                                   
+⠴ |         66 | 02-data-load                                                   
+⠦ |         67 | 02-data-load                                                   
+⠇ |         69 | 02-data-load                                                   
+⠏ |         70 | 02-data-load                                                   
+⠋ |         71 | 02-data-load                                                   
+⠹ |         73 | 02-data-load                                                   
+⠴ |         76 | 02-data-load                                                   
+⠧ |         78 | 02-data-load                                                   
+⠏ |         80 | 02-data-load                                                   
+⠹ |         83 | 02-data-load                                                   
+⠼ |         85 | 02-data-load                                                   
+⠴ |         86 | 02-data-load                                                   
+⠦ |         87 | 02-data-load                                                   
+⠧ |         88 | 02-data-load                                                   
+⠏ |         90 | 02-data-load                                                   
+⠋ |         91 | 02-data-load                                                   
+⠙ |         92 | 02-data-load                                                   
+⠹ |         93 | 02-data-load                                                   
+⠼ |         95 | 02-data-load                                                   
+⠦ |         97 | 02-data-load                                                   
+⠧ |         98 | 02-data-load                                                   
+⠇ |         99 | 02-data-load                                                   
+⠏ |        100 | 02-data-load                                                   
+⠋ |        101 | 02-data-load                                                   
+⠙ |        102 | 02-data-load                                                   
+⠸ |        104 | 02-data-load                                                   
+⠼ |        105 | 02-data-load                                                   
+⠴ |        106 | 02-data-load                                                   
+⠦ |        107 | 02-data-load                                                   
+⠧ |        108 | 02-data-load                                                   
+⠇ |        109 | 02-data-load                                                   
+⠋ |        111 | 02-data-load                                                   
+⠙ |        112 | 02-data-load                                                   
+⠹ |        113 | 02-data-load                                                   
+⠸ |        114 | 02-data-load                                                   
+⠼ |        115 | 02-data-load                                                   
+⠴ |        116 | 02-data-load                                                   
+⠧ |        118 | 02-data-load                                                   
+⠇ |        119 | 02-data-load                                                   
+⠏ |        120 | 02-data-load                                                   
+⠋ |        121 | 02-data-load                                                   
+⠙ |        122 | 02-data-load                                                   
+⠹ |        123 | 02-data-load                                                   
+⠼ |        125 | 02-data-load                                                   
+⠴ |        126 | 02-data-load                                                   
+⠦ |        127 | 02-data-load                                                   
+⠇ |        129 | 02-data-load                                                   
+⠏ |        130 | 02-data-load                                                   
+⠋ |        131 | 02-data-load                                                   
+⠙ |        132 | 02-data-load                                                   
+⠹ |        133 | 02-data-load                                                   
+⠸ |        134 | 02-data-load                                                   
+⠼ |        135 | 02-data-load                                                   
+⠴ |        136 | 02-data-load                                                   
+⠦ |        137 | 02-data-load                                                   
+⠧ |        138 | 02-data-load                                                   
+⠇ |        139 | 02-data-load                                                   
+⠏ |        140 | 02-data-load                                                   
+⠋ |        141 | 02-data-load                                                   
+⠙ |        142 | 02-data-load                                                   
+⠹ |        143 | 02-data-load                                                   
+⠸ |        144 | 02-data-load                                                   
+⠼ |        145 | 02-data-load                                                   
+⠴ |        146 | 02-data-load                                                   
+⠦ |        147 | 02-data-load                                                   
+⠧ |        148 | 02-data-load                                                   
+⠇ |        149 | 02-data-load                                                   
+⠏ |        150 | 02-data-load                                                   
+⠋ |        151 | 02-data-load                                                   
+⠙ |        152 | 02-data-load                                                   
+⠹ |        153 | 02-data-load                                                   
+⠸ |        154 | 02-data-load                                                   
+⠼ |        155 | 02-data-load                                                   
+⠴ |        156 | 02-data-load                                                   
+⠦ |        157 | 02-data-load                                                   
+⠧ |        158 | 02-data-load                                                   
+⠇ |        159 | 02-data-load                                                   
+⠏ |        160 | 02-data-load                                                   
+⠋ |        161 | 02-data-load                                                   
+⠙ |        162 | 02-data-load                                                   
+⠹ |        163 | 02-data-load                                                   
+⠸ |        164 | 02-data-load                                                   
+⠼ |        165 | 02-data-load                                                   
+⠴ |        166 | 02-data-load                                                   
+⠦ |        167 | 02-data-load                                                   
+⠧ |        168 | 02-data-load                                                   
+⠇ |        169 | 02-data-load                                                   
+⠏ |        170 | 02-data-load                                                   
+⠋ |        171 | 02-data-load                                                   
+⠙ |        172 | 02-data-load                                                   
+⠹ |        173 | 02-data-load                                                   
+⠸ |        174 | 02-data-load                                                   
+⠼ |        175 | 02-data-load                                                   
+⠴ |        176 | 02-data-load                                                   
+⠦ |        177 | 02-data-load                                                   
+⠧ |        178 | 02-data-load                                                   
+⠇ |        179 | 02-data-load                                                   
+⠏ |        180 | 02-data-load                                                   
+⠋ |        181 | 02-data-load                                                   
+⠙ |        182 | 02-data-load                                                   
+✔ |        182 | 02-data-load [1516.3s]
+
+⠏ |          0 | 03-filter                                                      
+⠋ |   1      0 | 03-filter                                                      
+✖ | 1 3      0 | 03-filter [1.3s]
+────────────────────────────────────────────────────────────────────────────────
+Warning ('test-03-filter.R:8:1'): (code run outside of `test_that()`)
+package 'ggplot2' was built under R version 4.5.2
+Backtrace:
+    ▆
+ 1. └─base::library(ggplot2)
+ 2.   └─base (local) testRversion(pkgInfo, package, pkgpath)
+
+Warning ('test-03-filter.R:8:1'): (code run outside of `test_that()`)
+package 'DT' was built under R version 4.5.2
+Backtrace:
+    ▆
+ 1. └─base::library(DT)
+ 2.   └─base (local) testRversion(pkgInfo, package, pkgpath)
+
+Warning ('test-03-filter.R:8:1'): (code run outside of `test_that()`)
+cannot open file 'modules/pair_module.R': No such file or directory
+Backtrace:
+    ▆
+ 1. └─base::source("modules/pair_module.R")
+ 2.   └─base::file(filename, "r", encoding = encoding)
+
+Error ('test-03-filter.R:8:1'): (code run outside of `test_that()`)
+Error in `file(filename, "r", encoding = encoding)`: cannot open the connection
+Backtrace:
+    ▆
+ 1. └─base::source("modules/pair_module.R")
+ 2.   └─base::file(filename, "r", encoding = encoding)
+────────────────────────────────────────────────────────────────────────────────
+
+⠏ |          0 | 04-comparison                                                  
+✖ | 1 1      0 | 04-comparison
+────────────────────────────────────────────────────────────────────────────────
+Warning ('test-04-comparison.R:8:1'): (code run outside of `test_that()`)
+cannot open file 'modules/pair_module.R': No such file or directory
+Backtrace:
+    ▆
+ 1. └─base::source("modules/pair_module.R")
+ 2.   └─base::file(filename, "r", encoding = encoding)
+
+Error ('test-04-comparison.R:8:1'): (code run outside of `test_that()`)
+Error in `file(filename, "r", encoding = encoding)`: cannot open the connection
+Backtrace:
+    ▆
+ 1. └─base::source("modules/pair_module.R")
+ 2.   └─base::file(filename, "r", encoding = encoding)
+────────────────────────────────────────────────────────────────────────────────
+
+══ Results ═════════════════════════════════════════════════════════════════════
+Duration: 1518.1 s
+
+── Failed tests ────────────────────────────────────────────────────────────────
+Error ('test-03-filter.R:8:1'): (code run outside of `test_that()`)
+Error in `file(filename, "r", encoding = encoding)`: cannot open the connection
+Backtrace:
+    ▆
+ 1. └─base::source("modules/pair_module.R")
+ 2.   └─base::file(filename, "r", encoding = encoding)
+
+Error ('test-04-comparison.R:8:1'): (code run outside of `test_that()`)
+Error in `file(filename, "r", encoding = encoding)`: cannot open the connection
+Backtrace:
+    ▆
+ 1. └─base::source("modules/pair_module.R")
+ 2.   └─base::file(filename, "r", encoding = encoding)
+
+[ FAIL 2 | WARN 4 | SKIP 0 | PASS 202 ]

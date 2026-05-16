@@ -1,0 +1,19 @@
+# Raw and processed data (can be large / contain real crime data)
+data/
+
+# R session artefacts
+.Rhistory
+.RData
+.Rproj.user/
+*.Rproj
+
+# Shiny log
+shiny_log.txt
+
+# Claude Code files
+.claude/
+CLAUDE.md
+
+# OS / editor noise
+.DS_Store
+Thumbs.db

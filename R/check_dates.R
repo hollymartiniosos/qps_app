@@ -1,0 +1,10 @@
+setwd("C:/Users/M/Git/qps_app")
+library(data.table)
+library(readxl)
+dt <- readRDS("data/processed/qld_victims_num.rds")
+cat("date class:", class(dt$date), "\n")
+cat("date NA count:", sum(is.na(dt$date)), "/", nrow(dt), "\n")
+raw <- as.data.table(read_excel("data/raw/qld_victims_num.xlsx",
+                                col_names = TRUE, .name_repair = "minimal"))
+cat("Raw cols 1-4:", paste(names(raw)[1:4], collapse = ", "), "\n")
+cat("Date col sample:", paste(head(as.character(raw[[1]]), 8), collapse = " | "), "\n")
