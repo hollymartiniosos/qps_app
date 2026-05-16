@@ -106,19 +106,28 @@ do.call(
           }
 
           /* ── DataTables pagination buttons ───────────────────────── */
-          .dataTables_paginate .paginate_button {
-            color: #005eb8 !important;
+          .dataTables_paginate .paginate_button > a,
+          .dataTables_paginate .paginate_button > a:visited {
+            background-color: #005eb8 !important;
+            border-color:     #005eb8 !important;
+            color:            #ffffff !important;
           }
-          .dataTables_paginate .paginate_button.current,
-          .dataTables_paginate .paginate_button.current:hover {
-            color: #ffffff !important;
-            background: #005eb8 !important;
-            border-color: #005eb8 !important;
+          .dataTables_paginate .paginate_button.current > a,
+          .dataTables_paginate .paginate_button.current > a:hover {
+            background-color: #003d82 !important;
+            border-color:     #003d82 !important;
+            color:            #ffffff !important;
           }
-          .dataTables_paginate .paginate_button:hover {
-            color: #ffffff !important;
-            background: #004f9e !important;
-            border-color: #004f9e !important;
+          .dataTables_paginate .paginate_button:not(.disabled) > a:hover,
+          .dataTables_paginate .paginate_button:not(.disabled) > a:focus {
+            background-color: #004f9e !important;
+            border-color:     #004f9e !important;
+            color:            #ffffff !important;
+          }
+          .dataTables_paginate .paginate_button.disabled > a {
+            background-color: #005eb8 !important;
+            border-color:     #005eb8 !important;
+            color:            rgba(255,255,255,0.45) !important;
           }
 
           /* ── Sidebar & layout ─────────────────────────────────────── */
