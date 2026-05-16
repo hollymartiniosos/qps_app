@@ -91,7 +91,6 @@ SUBGROUP_COLORS <- c(
   "Traffic Offences"        = "#F5A623",  # QLD Gold
   "Domestic Violence"       = "#AD1457",  # Crimson Pink
   "Good Order & Trespass"   = "#546E7A",  # Blue Grey
-  "Prostitution"            = "#8D6E63",  # Warm Brown
-  "Liquor & Gaming"         = "#6D4C41",  # Dark Brown
-  "Other Offences"          = "#9E9E9E"   # Mid Grey
+  "Liquor Offences"         = "#6D4C41",  # Dark Brown
+  "Miscellaneous Offences"  = "#9E9E9E"   # Mid Grey
 )

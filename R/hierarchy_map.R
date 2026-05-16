@@ -5,6 +5,7 @@
 #   Level 3  offence_col : individual column names as they appear in the CSV/XLSX files
 #
 # is_subtotal = TRUE  ->  this column aggregates sub-types (exclude when summing individuals)
+# Hierarchy aligned with QGSO Crime Report Queensland 2024-25 (pp. 104-110)
 
 # ── Package installation ───────────────────────────────────────────────────────
 required_pkgs <- c("data.table", "readxl", "lubridate")
@@ -34,8 +35,9 @@ offence_hierarchy_exact <- data.table(
     "Rape and Attempted Rape", "Other Sexual Offences", "Sexual Offences",
     # Robbery (3)
     "Armed Robbery", "Unarmed Robbery", "Robbery",
-    # Other Against Person (6)
+    # Other Against Person (7)
     "Kidnapping/Abduction", "Extortion", "Stalking", "Harassment",
+    "Coercive Control",
     "Other Offences Against the Person", "Other Offences Against Person",
     # Unlawful Entry (5)
     "Unlawful Entry With Violence - Dwelling", "Unlawful Entry Without Violence - Dwelling",
@@ -64,11 +66,10 @@ offence_hierarchy_exact <- data.table(
     "Breach of Domestic Violence Order",
     # Good Order & Trespass (2)
     "Good Order Offences", "Trespass",
-    # Prostitution (2)
-    "Prostitution Offences", "Prostitution",
-    # Liquor & Gaming (2)
-    "Liquor Act Offences", "Gaming",
-    # Catch-all other (3)
+    # Liquor Offences (1)
+    "Liquor Act Offences",
+    # Miscellaneous Offences (6) — QGSO groups gaming, prostitution, and catch-all here
+    "Gaming", "Prostitution Offences", "Prostitution",
     "Stock Related Offences", "Miscellaneous Offences", "Other Offences"
   ),
   main_group = c(
@@ -76,7 +77,7 @@ offence_hierarchy_exact <- data.table(
     rep("Offences Against the Person",  7L),   # Assault
     rep("Offences Against the Person",  3L),   # Sexual Offences
     rep("Offences Against the Person",  3L),   # Robbery
-    rep("Offences Against the Person",  6L),   # Other Against Person
+    rep("Offences Against the Person",  7L),   # Other Against Person
     rep("Offences Against Property",    5L),   # Unlawful Entry
     rep("Offences Against Property",    4L),   # Arson & Property Damage
     rep("Offences Against Property",    5L),   # Fraud & Related
@@ -86,28 +87,26 @@ offence_hierarchy_exact <- data.table(
     rep("Other Offences",               5L),   # Traffic
     rep("Other Offences",               1L),   # Domestic Violence
     rep("Other Offences",               2L),   # Good Order & Trespass
-    rep("Other Offences",               2L),   # Prostitution
-    rep("Other Offences",               2L),   # Liquor & Gaming
-    rep("Other Offences",               3L)    # Catch-all
+    rep("Other Offences",               1L),   # Liquor Offences
+    rep("Other Offences",               6L)    # Miscellaneous Offences
   ),
   subgroup = c(
-    rep("Homicide",              9L),
-    rep("Assault",               7L),
-    rep("Sexual Offences",       3L),
-    rep("Robbery",               3L),
-    rep("Other Against Person",  6L),
-    rep("Unlawful Entry",        5L),
+    rep("Homicide",                9L),
+    rep("Assault",                 7L),
+    rep("Sexual Offences",         3L),
+    rep("Robbery",                 3L),
+    rep("Other Against Person",    7L),
+    rep("Unlawful Entry",          5L),
     rep("Arson & Property Damage", 4L),
-    rep("Fraud & Related",       5L),
-    rep("Stealing & Theft",     10L),
-    rep("Drug Offences",         5L),
-    rep("Weapons Offences",      2L),
-    rep("Traffic Offences",      5L),
-    rep("Domestic Violence",     1L),
-    rep("Good Order & Trespass", 2L),
-    rep("Prostitution",          2L),
-    rep("Liquor & Gaming",       2L),
-    rep("Other Offences",        3L)
+    rep("Fraud & Related",         5L),
+    rep("Stealing & Theft",       10L),
+    rep("Drug Offences",           5L),
+    rep("Weapons Offences",        2L),
+    rep("Traffic Offences",        5L),
+    rep("Domestic Violence",       1L),
+    rep("Good Order & Trespass",   2L),
+    rep("Liquor Offences",         1L),
+    rep("Miscellaneous Offences",  6L)
   ),
   is_subtotal = c(
     # Homicide:   last is subtotal
@@ -118,8 +117,8 @@ offence_hierarchy_exact <- data.table(
     FALSE, FALSE, TRUE,
     # Robbery:    last is subtotal
     FALSE, FALSE, TRUE,
-    # Other Person: none
-    FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
+    # Other Person: none subtotal
+    FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
     # Unlawful Entry: last is subtotal
     FALSE, FALSE, FALSE, FALSE, TRUE,
     # Arson:      last is subtotal
@@ -138,12 +137,10 @@ offence_hierarchy_exact <- data.table(
     FALSE,
     # Good Order: none
     FALSE, FALSE,
-    # Prostitution: none
-    FALSE, FALSE,
-    # Liquor:     none
-    FALSE, FALSE,
-    # Catch-all:  none
-    FALSE, FALSE, FALSE
+    # Liquor Offences: none
+    FALSE,
+    # Miscellaneous Offences: none
+    FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
   )
 )
 
@@ -163,36 +160,34 @@ classify_by_pattern <- function(col_name) {
     return(list(main_group = "Offences Against the Person", subgroup = "Sexual Offences",      is_subtotal = FALSE))
   if (grepl("robbery", s))
     return(list(main_group = "Offences Against the Person", subgroup = "Robbery",              is_subtotal = FALSE))
-  if (grepl("kidnap|abduction|extortion|stalking|harassment", s))
+  if (grepl("kidnap|abduction|extortion|stalking|harassment|coercive control", s))
     return(list(main_group = "Offences Against the Person", subgroup = "Other Against Person", is_subtotal = FALSE))
 
   if (grepl("unlawful entry|break.and.enter|break.&.enter|burglary", s))
-    return(list(main_group = "Offences Against Property",   subgroup = "Unlawful Entry",       is_subtotal = FALSE))
+    return(list(main_group = "Offences Against Property",   subgroup = "Unlawful Entry",           is_subtotal = FALSE))
   if (grepl("arson|wilful damage|property damage", s))
-    return(list(main_group = "Offences Against Property",   subgroup = "Arson & Property Damage", is_subtotal = FALSE))
+    return(list(main_group = "Offences Against Property",   subgroup = "Arson & Property Damage",  is_subtotal = FALSE))
   if (grepl("fraud|forgery|counterfeit|stolen goods|handling stolen|receiving stolen", s))
-    return(list(main_group = "Offences Against Property",   subgroup = "Fraud & Related",      is_subtotal = FALSE))
+    return(list(main_group = "Offences Against Property",   subgroup = "Fraud & Related",          is_subtotal = FALSE))
   if (grepl("stealing|theft|unlawful use of motor|motor vehicle theft", s))
-    return(list(main_group = "Offences Against Property",   subgroup = "Stealing & Theft",     is_subtotal = FALSE))
+    return(list(main_group = "Offences Against Property",   subgroup = "Stealing & Theft",         is_subtotal = FALSE))
 
   if (grepl("drug|traffick|narcotic|possession.*drug|produce.*drug|manufacture.*drug", s))
-    return(list(main_group = "Other Offences",              subgroup = "Drug Offences",        is_subtotal = FALSE))
+    return(list(main_group = "Other Offences", subgroup = "Drug Offences",           is_subtotal = FALSE))
   if (grepl("weapon", s))
-    return(list(main_group = "Other Offences",              subgroup = "Weapons Offences",     is_subtotal = FALSE))
+    return(list(main_group = "Other Offences", subgroup = "Weapons Offences",        is_subtotal = FALSE))
   if (grepl("drink driving|dangerous operation|disqualified driving|interfere.*vehicle", s))
-    return(list(main_group = "Other Offences",              subgroup = "Traffic Offences",     is_subtotal = FALSE))
+    return(list(main_group = "Other Offences", subgroup = "Traffic Offences",        is_subtotal = FALSE))
   if (grepl("domestic violence|dvpo|dvo|protection order", s))
-    return(list(main_group = "Other Offences",              subgroup = "Domestic Violence",    is_subtotal = FALSE))
-  if (grepl("prostitut", s))
-    return(list(main_group = "Other Offences",              subgroup = "Prostitution",         is_subtotal = FALSE))
-  if (grepl("liquor|gaming|gambl", s))
-    return(list(main_group = "Other Offences",              subgroup = "Liquor & Gaming",      is_subtotal = FALSE))
+    return(list(main_group = "Other Offences", subgroup = "Domestic Violence",       is_subtotal = FALSE))
+  if (grepl("liquor", s))
+    return(list(main_group = "Other Offences", subgroup = "Liquor Offences",         is_subtotal = FALSE))
   if (grepl("trespass|good order|disorderly", s))
-    return(list(main_group = "Other Offences",              subgroup = "Good Order & Trespass", is_subtotal = FALSE))
-  if (grepl("stock", s))
-    return(list(main_group = "Other Offences",              subgroup = "Other Offences",       is_subtotal = FALSE))
+    return(list(main_group = "Other Offences", subgroup = "Good Order & Trespass",   is_subtotal = FALSE))
+  if (grepl("prostitut|gaming|gambl|stock", s))
+    return(list(main_group = "Other Offences", subgroup = "Miscellaneous Offences",  is_subtotal = FALSE))
 
-  list(main_group = "Other Offences", subgroup = "Other Offences", is_subtotal = FALSE)
+  list(main_group = "Other Offences", subgroup = "Miscellaneous Offences", is_subtotal = FALSE)
 }
 
 
