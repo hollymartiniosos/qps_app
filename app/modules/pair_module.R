@@ -321,7 +321,7 @@ pair_server <- function(id, pair_data = NULL, metric = "Number") {
         geom_col(width = 20) +
         scale_x_date(date_labels = "%b %y", date_breaks = "2 months") +
         scale_y_continuous(labels = comma,
-                           expand = expansion(mult = c(0, 0.05))) +
+                           expand = expansion(mult = c(0, 0.12))) +
         scale_fill_manual(values = colors, drop = TRUE, na.value = "#CCCCCC") +
         labs(x = NULL, y = y_lab, fill = NULL) +
         theme_minimal(base_size = 11) +
