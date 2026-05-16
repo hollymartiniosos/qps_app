@@ -1,0 +1,92 @@
+offence,main_group,subgroup,is_subtotal
+Arson,Offences Against Property,Arson,TRUE
+Fraud,Offences Against Property,Fraud,TRUE
+Fraud by Cheque,Offences Against Property,Fraud,FALSE
+Fraud by Computer,Offences Against Property,Fraud,FALSE
+Fraud by Credit Card,Offences Against Property,Fraud,FALSE
+Identity Fraud,Offences Against Property,Fraud,FALSE
+Other Fraud,Offences Against Property,Fraud,FALSE
+Handling Stolen Goods,Offences Against Property,Handling Stolen Goods,TRUE
+Other Handling Stolen Goods,Offences Against Property,Handling Stolen Goods,FALSE
+Possess Property Suspected Stolen,Offences Against Property,Handling Stolen Goods,FALSE
+Possess etc. Tainted Property,Offences Against Property,Handling Stolen Goods,FALSE
+Receiving Stolen Property,Offences Against Property,Handling Stolen Goods,FALSE
+Offences Against Property,Offences Against Property,Offences Against Property,TRUE
+Other Property Damage,Offences Against Property,Other Property Damage,TRUE
+Other Stealing,Offences Against Property,Other Theft (excl. Unlawful Entry),FALSE
+Other Theft (excl. Unlawful Entry),Offences Against Property,Other Theft (excl. Unlawful Entry),TRUE
+Shop Stealing,Offences Against Property,Other Theft (excl. Unlawful Entry),FALSE
+Stealing from Dwellings,Offences Against Property,Other Theft (excl. Unlawful Entry),FALSE
+Vehicles (steal from/enter with intent),Offences Against Property,Other Theft (excl. Unlawful Entry),FALSE
+Unlawful Entry With Intent - Dwelling,Offences Against Property,Unlawful Entry,TRUE
+Unlawful Entry With Intent - Other,Offences Against Property,Unlawful Entry,FALSE
+Unlawful Entry With Intent - Shop,Offences Against Property,Unlawful Entry,FALSE
+Unlawful Entry With Violence - Dwelling,Offences Against Property,Unlawful Entry,FALSE
+Unlawful Entry Without Violence - Dwelling,Offences Against Property,Unlawful Entry,FALSE
+Unlawful Entry,Offences Against Property,Unlawful Entry,TRUE
+Unlawful Use of Motor Vehicle,Offences Against Property,Unlawful Use of Motor Vehicle,TRUE
+Common Assault',Offences Against the Person,Assault,FALSE
+Grievous Assault,Offences Against the Person,Assault,FALSE
+Serious Assault,Offences Against the Person,Assault,FALSE
+Serious Assault (Other),Offences Against the Person,Assault,FALSE
+Assault,Offences Against the Person,Assault,TRUE
+Homicide (Murder),Offences Against the Person,Homicide (Murder),TRUE
+Attempted Murder,Offences Against the Person,Other Homicide,FALSE
+Conspiracy to Murder,Offences Against the Person,Other Homicide,FALSE
+Driving Causing Death,Offences Against the Person,Other Homicide,FALSE
+Manslaughter (excl. by driving),Offences Against the Person,Other Homicide,FALSE
+Manslaughter Unlawful Striking Causing Death,Offences Against the Person,Other Homicide,FALSE
+Other Homicide,Offences Against the Person,Other Homicide,TRUE
+Coercive Control,Offences Against the Person,Other Offences Against the Person,FALSE
+Extortion,Offences Against the Person,Other Offences Against the Person,FALSE
+Kidnapping & Abduction etc.,Offences Against the Person,Other Offences Against the Person,FALSE
+Life Endangering Acts,Offences Against the Person,Other Offences Against the Person,FALSE
+Other Offences Against the Person,Offences Against the Person,Other Offences Against the Person,TRUE
+Stalking,Offences Against the Person,Other Offences Against the Person,FALSE
+Offences Against the Person,Offences Against the Person,Other Offences Against the Person,TRUE
+Armed Robbery,Offences Against the Person,Robbery,FALSE
+Unarmed Robbery,Offences Against the Person,Robbery,FALSE
+Robbery,Offences Against the Person,Robbery,TRUE
+Other Sexual Offences,Offences Against the Person,Sexual Offences,FALSE
+Rape and Attempted Rape,Offences Against the Person,Sexual Offences,FALSE
+Sexual Offences,Offences Against the Person,Sexual Offences,TRUE
+Breach Domestic Violence Protection Order,Other Offences,Breach of DVO,TRUE
+Other Drug Offences,Other Offences,Drug Offences,FALSE
+Possess Drugs,Other Offences,Drug Offences,FALSE
+Produce Drugs,Other Offences,Drug Offences,FALSE
+Sell Supply Drugs,Other Offences,Drug Offences,FALSE
+Trafficking Drugs,Other Offences,Drug Offences,FALSE
+Drug Offences,Other Offences,Drug Offences,TRUE
+Disobey Move-on Direction,Other Offences,Good Order Offences,FALSE
+Fare Evasion,Other Offences,Good Order Offences,FALSE
+Public Nuisance,Other Offences,Good Order Offences,FALSE
+Public Soliciting,Other Offences,Good Order Offences,FALSE
+Resist Incite Hinder Obstruct Police,Other Offences,Good Order Offences,FALSE
+Good Order Offences,Other Offences,Good Order Offences,TRUE
+Liquor (excl. Drunkenness),Other Offences,Liquor Offences (excl. Drunkenness),TRUE
+Advertising Prostitution,Other Offences,Miscellaneous Offences,FALSE
+Found in Places Used for Purpose of Prostitution Offences,Other Offences,Miscellaneous Offences,FALSE
+Gaming Racing & Betting Offences,Other Offences,Miscellaneous Offences,FALSE
+Have Interest in Premises Used for Prostitution Offences,Other Offences,Miscellaneous Offences,FALSE
+Knowingly Participate in Provision Prostitution Offences,Other Offences,Miscellaneous Offences,FALSE
+Miscellaneous Offences,Other Offences,Miscellaneous Offences,TRUE
+Other Miscellaneous,Other Offences,Miscellaneous Offences,FALSE
+Other Prostitution Offences,Other Offences,Miscellaneous Offences,FALSE
+Permit Minor to be at a Place Used for Prostitution Offences,Other Offences,Miscellaneous Offences,FALSE
+Procuring Prostitution,Other Offences,Miscellaneous Offences,FALSE
+Prostitution Offences,Other Offences,Miscellaneous Offences,FALSE
+Stock Related Offences,Other Offences,Miscellaneous Offences,FALSE
+Voluntary Assisted Dying,Other Offences,Miscellaneous Offences,FALSE
+Other Offences,Other Offences,Miscellaneous Offences,TRUE
+Dangerous Operation of a Vehicle,Other Offences,Traffic and Related Offences,FALSE
+Disqualified Driving,Other Offences,Traffic and Related Offences,FALSE
+Drink Driving,Other Offences,Traffic and Related Offences,FALSE
+Interfere with Mechanism of Motor Vehicle,Other Offences,Traffic and Related Offences,FALSE
+Traffic and Related Offences,Other Offences,Traffic and Related Offences,TRUE
+Trespassing and Vagrancy,Other Offences,Trespassing and Vagrancy,TRUE
+Bomb Possess and/or use of,Other Offences,Weapons Act Offences,FALSE
+Possess and/or use other weapons; restricted items,Other Offences,Weapons Act Offences,FALSE
+Unlawful Possess Concealable Firearm,Other Offences,Weapons Act Offences,FALSE
+Unlawful Possess Firearm - Other,Other Offences,Weapons Act Offences,FALSE
+Weapons Act Offences - Other,Other Offences,Weapons Act Offences,FALSE
+Weapons Act Offences,Other Offences,Weapons Act Offences,TRUE

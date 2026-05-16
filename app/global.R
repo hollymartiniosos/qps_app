@@ -77,20 +77,28 @@ load_pair <- function(nm) {
 # Queensland Government brand palette
 # Primary: Maroon #78003F  Supporting: Blue #005DA6  Gold #F5A623
 SUBGROUP_COLORS <- c(
-  "Homicide"                = "#78003F",  # QLD Maroon
-  "Assault"                 = "#C4007A",  # Deep Magenta
-  "Sexual Offences"         = "#8B1A4A",  # Dark Berry
-  "Robbery"                 = "#E5590F",  # QLD Orange
-  "Other Against Person"    = "#FF8C00",  # Amber
-  "Unlawful Entry"          = "#005DA6",  # QLD Blue
-  "Arson & Property Damage" = "#CB2B3B",  # Red
-  "Fraud & Related"         = "#1565C0",  # Dark Blue
-  "Stealing & Theft"        = "#0288D1",  # Sky Blue
-  "Drug Offences"           = "#007478",  # QLD Teal
-  "Weapons Offences"        = "#489A4A",  # QLD Green
-  "Traffic Offences"        = "#F5A623",  # QLD Gold
-  "Domestic Violence"       = "#AD1457",  # Crimson Pink
-  "Good Order & Trespass"   = "#546E7A",  # Blue Grey
-  "Liquor Offences"         = "#6D4C41",  # Dark Brown
-  "Miscellaneous Offences"  = "#9E9E9E"   # Mid Grey
+  # Offences Against the Person
+  "Homicide (Murder)"                  = "#78003F",  # QLD Maroon
+  "Other Homicide"                     = "#B0004E",  # Lighter Maroon
+  "Assault"                            = "#C4007A",  # Deep Magenta
+  "Sexual Offences"                    = "#8B1A4A",  # Dark Berry
+  "Robbery"                            = "#E5590F",  # QLD Orange
+  "Other Offences Against the Person"  = "#FF8C00",  # Amber
+  # Offences Against Property
+  "Unlawful Entry"                     = "#005DA6",  # QLD Blue
+  "Arson"                              = "#CB2B3B",  # Red
+  "Other Property Damage"              = "#E57373",  # Light Red
+  "Unlawful Use of Motor Vehicle"      = "#1565C0",  # Dark Blue
+  "Other Theft (excl. Unlawful Entry)" = "#0288D1",  # Sky Blue
+  "Fraud"                              = "#0097A7",  # Cyan
+  "Handling Stolen Goods"              = "#00695C",  # Dark Teal
+  # Other Offences
+  "Drug Offences"                      = "#007478",  # QLD Teal
+  "Liquor Offences (excl. Drunkenness)"= "#6D4C41",  # Dark Brown
+  "Breach of DVO"                      = "#AD1457",  # Crimson Pink
+  "Trespassing and Vagrancy"           = "#455A64",  # Dark Blue Grey
+  "Weapons Act Offences"               = "#489A4A",  # QLD Green
+  "Good Order Offences"                = "#546E7A",  # Blue Grey
+  "Traffic and Related Offences"       = "#F5A623",  # QLD Gold
+  "Miscellaneous Offences"             = "#9E9E9E"   # Mid Grey
 )
