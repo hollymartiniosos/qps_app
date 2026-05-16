@@ -30,6 +30,7 @@ do.call(
       title  = "QPS Crime Statistics",
       theme  = bs_theme(bootswatch = "flatly"),
       header = tags$head(
+        tags$link(rel = "shortcut icon", href = "favicon.ico"),
         tags$link(
           rel  = "stylesheet",
           href = "https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&display=swap"
@@ -88,6 +89,36 @@ do.call(
           .navbar-default .dropdown-menu > .active > a:hover {
             background-color: #003d82 !important;
             color:            #ffffff !important;
+          }
+
+          /* ── Comparison tabset tabs ───────────────────────────────── */
+          .nav-tabs > li > a {
+            color: #005eb8 !important;
+          }
+          .nav-tabs > li.active > a,
+          .nav-tabs > li.active > a:hover,
+          .nav-tabs > li.active > a:focus {
+            color: #005eb8 !important;
+            border-top: 2px solid #005eb8 !important;
+          }
+          .nav-tabs > li > a:hover {
+            color: #003d82 !important;
+          }
+
+          /* ── DataTables pagination buttons ───────────────────────── */
+          .dataTables_paginate .paginate_button {
+            color: #005eb8 !important;
+          }
+          .dataTables_paginate .paginate_button.current,
+          .dataTables_paginate .paginate_button.current:hover {
+            color: #ffffff !important;
+            background: #005eb8 !important;
+            border-color: #005eb8 !important;
+          }
+          .dataTables_paginate .paginate_button:hover {
+            color: #ffffff !important;
+            background: #004f9e !important;
+            border-color: #004f9e !important;
           }
 
           /* ── Sidebar & layout ─────────────────────────────────────── */
