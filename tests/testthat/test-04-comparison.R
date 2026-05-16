@@ -7,11 +7,9 @@ proj_root <- normalizePath(
 )
 source(file.path(proj_root, "app", "global.R"), local = TRUE)
 
-make_pair <- function() {
-  list(real = REAL_DT, mock = MOCK_DT)
-}
+make_pair <- function() list(qps = QPS_DT, cs = CS_DT)
 
-fy_all <- unique(REAL_DT$financial_year)
+fy_all <- unique(QPS_DT$financial_year)
 
 # ── comp_subgroup tests -------------------------------------------------------
 
@@ -22,9 +20,8 @@ test_that("comp_subgroup has expected columns", {
       fy         = fy_all,
       subgroup   = "All"
     )
-    cs <- comp_subgroup()
-    expect_true(all(c("subgroup", "real", "mock", "diff", "pct_diff")
-                    %in% names(cs)))
+    tbl <- comp_subgroup()
+    expect_true(all(c("subgroup", "qps", "cs", "diff", "pct_diff") %in% names(tbl)))
   })
 })
 
@@ -35,8 +32,8 @@ test_that("comp_subgroup includes a TOTAL row", {
       fy         = fy_all,
       subgroup   = "All"
     )
-    cs <- comp_subgroup()
-    expect_true("TOTAL" %in% cs$subgroup)
+    tbl <- comp_subgroup()
+    expect_true("TOTAL" %in% tbl$subgroup)
   })
 })
 
@@ -47,41 +44,41 @@ test_that("comp_subgroup TOTAL equals sum of subgroup rows", {
       fy         = fy_all,
       subgroup   = "All"
     )
-    cs <- comp_subgroup()
-    total_row  <- cs[subgroup == "TOTAL"]
-    detail_sum <- cs[subgroup != "TOTAL", sum(real)]
-    expect_equal(total_row$real, detail_sum)
+    tbl        <- comp_subgroup()
+    total_row  <- tbl[subgroup == "TOTAL"]
+    detail_sum <- tbl[subgroup != "TOTAL", sum(qps)]
+    expect_equal(total_row$qps, detail_sum)
   })
 })
 
-test_that("comp_subgroup diff = mock - real", {
+test_that("comp_subgroup diff = cs - qps", {
   testServer(pair_server, args = list(pair_data = make_pair(), metric = "Number"), {
     session$setInputs(
       main_group = c("Offences Against the Person", "Other Offences"),
       fy         = fy_all,
       subgroup   = "All"
     )
-    cs <- comp_subgroup()
-    expect_equal(cs$diff, cs$mock - cs$real)
+    tbl <- comp_subgroup()
+    expect_equal(tbl$diff, tbl$cs - tbl$qps)
   })
 })
 
-test_that("comp_subgroup pct_diff is NA when real is 0", {
-  real_zero <- copy(REAL_DT)
-  real_zero[subgroup == "Assault", count := 0L]
-  mock_zero <- copy(MOCK_DT)
+test_that("comp_subgroup pct_diff is NA when qps is 0", {
+  qps_zero <- copy(QPS_DT)
+  qps_zero[subgroup == "Assault", count := 0L]
+  cs_zero  <- copy(CS_DT)
 
   testServer(pair_server,
-             args = list(pair_data = list(real = real_zero, mock = mock_zero),
+             args = list(pair_data = list(qps = qps_zero, cs = cs_zero),
                          metric = "Number"), {
     session$setInputs(
       main_group = "Offences Against the Person",
       fy         = fy_all,
       subgroup   = "Assault"
     )
-    cs <- comp_subgroup()
-    assault_row <- cs[subgroup == "Assault"]
-    if (nrow(assault_row) > 0L && assault_row$real == 0L)
+    tbl         <- comp_subgroup()
+    assault_row <- tbl[subgroup == "Assault"]
+    if (nrow(assault_row) > 0L && assault_row$qps == 0L)
       expect_true(is.na(assault_row$pct_diff))
   })
 })
@@ -96,26 +93,26 @@ test_that("comp_monthly has expected columns", {
       subgroup   = "All"
     )
     cm <- comp_monthly()
-    expect_true(all(c("month", "financial_year", "real", "mock", "diff", "pct_diff")
+    expect_true(all(c("month", "financial_year", "qps", "cs", "diff", "pct_diff")
                     %in% names(cm)))
   })
 })
 
-test_that("comp_monthly row count equals unique date × FY combos in filtered data", {
+test_that("comp_monthly row count equals unique date x FY combos", {
   testServer(pair_server, args = list(pair_data = make_pair(), metric = "Number"), {
     session$setInputs(
       main_group = c("Offences Against the Person", "Other Offences"),
       fy         = fy_all,
       subgroup   = "All"
     )
-    cm <- comp_monthly()
-    fr <- filt_real()
-    expected_n <- uniqueN(fr[, .(date, financial_year)])
+    cm         <- comp_monthly()
+    fq         <- filt_qps()
+    expected_n <- uniqueN(fq[, .(date, financial_year)])
     expect_equal(nrow(cm), expected_n)
   })
 })
 
-test_that("comp_monthly diff = mock - real for each row", {
+test_that("comp_monthly diff = cs - qps for each row", {
   testServer(pair_server, args = list(pair_data = make_pair(), metric = "Number"), {
     session$setInputs(
       main_group = c("Offences Against the Person", "Other Offences"),
@@ -123,6 +120,6 @@ test_that("comp_monthly diff = mock - real for each row", {
       subgroup   = "All"
     )
     cm <- comp_monthly()
-    expect_equal(cm$diff, cm$mock - cm$real)
+    expect_equal(cm$diff, cm$cs - cm$qps)
   })
 })

@@ -51,9 +51,9 @@ DATA_CACHE <- new.env(parent = emptyenv())
 
 DATA_FILES <- setNames(
   lapply(DATASET_INFO$name, function(nm) {
-    rp <- file.path("..", "data", "processed", paste0(nm, ".rds"))
-    mp <- file.path("..", "data", "mock",      paste0(nm, "_mock.rds"))
-    if (file.exists(rp) && file.exists(mp)) list(real = rp, mock = mp)
+    qps_path <- file.path("..", "data", "qps", paste0(nm, ".rds"))
+    cs_path  <- file.path("..", "data", "cs",  paste0(nm, ".rds"))
+    if (file.exists(qps_path) && file.exists(cs_path)) list(qps = qps_path, cs = cs_path)
     else NULL
   }),
   DATASET_INFO$name
@@ -64,9 +64,9 @@ DATASET_INFO <- DATASET_INFO[name %in% names(DATA_FILES)]
 load_pair <- function(nm) {
   if (!exists(nm, envir = DATA_CACHE, inherits = FALSE)) {
     paths <- DATA_FILES[[nm]]
-    real  <- readRDS(paths$real); if (!is.data.table(real)) setDT(real)
-    mock  <- readRDS(paths$mock); if (!is.data.table(mock)) setDT(mock)
-    assign(nm, list(real = real, mock = mock), envir = DATA_CACHE)
+    qps   <- readRDS(paths$qps); if (!is.data.table(qps)) setDT(qps)
+    cs    <- readRDS(paths$cs);  if (!is.data.table(cs))  setDT(cs)
+    assign(nm, list(qps = qps, cs = cs), envir = DATA_CACHE)
   }
   get(nm, envir = DATA_CACHE, inherits = FALSE)
 }

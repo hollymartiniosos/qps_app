@@ -71,17 +71,17 @@ pair_server <- function(id, pair_data = NULL, metric = "Number") {
       if (is.null(pair_data)) load_pair(id) else pair_data
     })
 
-    real <- reactive(get_data()$real)
-    mock <- reactive(get_data()$mock)
+    qps  <- reactive(get_data()$qps)
+    cs   <- reactive(get_data()$cs)
 
     extra_cols <- reactive({
-      r    <- real()
-      geo  <- Filter(nchar, strsplit(r[1L, geo_cols],  "\\|")[[1L]])
-      demo <- Filter(nchar, strsplit(r[1L, demo_cols], "\\|")[[1L]])
+      d    <- qps()
+      geo  <- Filter(nchar, strsplit(d[1L, geo_cols],  "\\|")[[1L]])
+      demo <- Filter(nchar, strsplit(d[1L, demo_cols], "\\|")[[1L]])
       c(geo, demo)
     })
 
-    fy_vals <- reactive(sort(unique(real()$financial_year)))
+    fy_vals <- reactive(sort(unique(qps()$financial_year)))
 
     current_fy <- local({
       m <- as.integer(format(Sys.Date(), "%m"))
@@ -95,7 +95,7 @@ pair_server <- function(id, pair_data = NULL, metric = "Number") {
 
     # Available main groups derived from the actual data for this dataset
     avail_groups <- reactive({
-      sort(unique(real()[!(is_subtotal), main_group]))
+      sort(unique(qps()[!(is_subtotal), main_group]))
     })
 
     # When a single subgroup is selected, charts drill down to offence level
@@ -117,7 +117,7 @@ pair_server <- function(id, pair_data = NULL, metric = "Number") {
         "LGA"      = "By Local Government Area",
         ds_label
       )
-      demo <- Filter(nchar, strsplit(real()[1L, demo_cols], "\\|")[[1L]])
+      demo <- Filter(nchar, strsplit(qps()[1L, demo_cols], "\\|")[[1L]])
       if (length(demo) > 0L)
         level_str <- paste0(level_str, " · by ",
                             paste(demo, collapse = " & "))
@@ -155,8 +155,8 @@ pair_server <- function(id, pair_data = NULL, metric = "Number") {
 
     output$subgroup_ui <- renderUI({
       sg <- if (length(input$main_group) > 0L)
-        sort(unique(real()[main_group %in% input$main_group &
-                             !(is_subtotal), subgroup]))
+        sort(unique(qps()[main_group %in% input$main_group &
+                            !(is_subtotal), subgroup]))
       else character(0L)
       selectInput(ns("subgroup"), label = NULL,
                   choices   = c("All" = "All", setNames(sg, sg)),
@@ -217,7 +217,7 @@ pair_server <- function(id, pair_data = NULL, metric = "Number") {
         })
       }
 
-      r <- real()
+      r <- qps()
       tagList(lapply(cols, function(col) {
         vals <- sort(unique(r[[col]]))
         tagList(
@@ -269,8 +269,8 @@ pair_server <- function(id, pair_data = NULL, metric = "Number") {
       res
     }
 
-    filt_real <- reactive(filter_dt(real()))
-    filt_mock <- reactive(filter_dt(mock()))
+    filt_qps <- reactive(filter_dt(qps()))
+    filt_cs  <- reactive(filter_dt(cs()))
 
 
     # ── Interactive bar chart --------------------------------------------------
@@ -353,58 +353,58 @@ pair_server <- function(id, pair_data = NULL, metric = "Number") {
         config(displayModeBar = FALSE)
     }
 
-    output$chart_real <- renderPlotly(make_chart(filt_real(), "Open QPS Data", fill_col()))
-    output$chart_mock <- renderPlotly(make_chart(filt_mock(), "CS Data",       fill_col()))
+    output$chart_real <- renderPlotly(make_chart(filt_qps(), "Open QPS Data", fill_col()))
+    output$chart_mock <- renderPlotly(make_chart(filt_cs(),  "CS Data",       fill_col()))
 
 
     # ── Comparison tables ------------------------------------------------------
 
     comp_subgroup <- reactive({
-      r <- filt_real()[, .(real = sum(count, na.rm = TRUE)), by = subgroup]
-      m <- filt_mock()[, .(mock = sum(count, na.rm = TRUE)), by = subgroup]
-      comp <- merge(r, m, by = "subgroup", all = TRUE)
-      comp[is.na(real), real := 0L][is.na(mock), mock := 0L]
-      comp[, diff     := mock - real]
-      comp[, pct_diff := fifelse(real > 0L,
-                                  round((mock - real) / real * 100, 1L),
+      q <- filt_qps()[, .(qps = sum(count, na.rm = TRUE)), by = subgroup]
+      c <- filt_cs()[ , .(cs  = sum(count, na.rm = TRUE)), by = subgroup]
+      comp <- merge(q, c, by = "subgroup", all = TRUE)
+      comp[is.na(qps), qps := 0L][is.na(cs), cs := 0L]
+      comp[, diff     := cs - qps]
+      comp[, pct_diff := fifelse(qps > 0L,
+                                  round((cs - qps) / qps * 100, 1L),
                                   NA_real_)]
       setorder(comp, subgroup)
       total <- data.table(subgroup = "TOTAL",
-                          real = comp[, sum(real)], mock = comp[, sum(mock)])
-      total[, diff := mock - real]
-      total[, pct_diff := round((mock - real) / real * 100, 1L)]
+                          qps = comp[, sum(qps)], cs = comp[, sum(cs)])
+      total[, diff    := cs - qps]
+      total[, pct_diff := round((cs - qps) / qps * 100, 1L)]
       rbindlist(list(comp, total), use.names = TRUE)
     })
 
     comp_offence <- reactive({
-      r <- filt_real()[, .(real = sum(count, na.rm = TRUE)),
-                       by = .(offence, subgroup)]
-      m <- filt_mock()[, .(mock = sum(count, na.rm = TRUE)),
-                       by = .(offence, subgroup)]
-      comp <- merge(r, m, by = c("offence", "subgroup"), all = TRUE)
-      comp[is.na(real), real := 0L][is.na(mock), mock := 0L]
-      comp[, diff     := mock - real]
-      comp[, pct_diff := fifelse(real > 0L,
-                                  round((mock - real) / real * 100, 1L),
+      q <- filt_qps()[, .(qps = sum(count, na.rm = TRUE)),
+                      by = .(offence, subgroup)]
+      c <- filt_cs()[ , .(cs  = sum(count, na.rm = TRUE)),
+                      by = .(offence, subgroup)]
+      comp <- merge(q, c, by = c("offence", "subgroup"), all = TRUE)
+      comp[is.na(qps), qps := 0L][is.na(cs), cs := 0L]
+      comp[, diff     := cs - qps]
+      comp[, pct_diff := fifelse(qps > 0L,
+                                  round((cs - qps) / qps * 100, 1L),
                                   NA_real_)]
       setorder(comp, subgroup, offence)
-      comp[, .(offence, subgroup, real, mock, diff, pct_diff)]
+      comp[, .(offence, subgroup, qps, cs, diff, pct_diff)]
     })
 
     comp_monthly <- reactive({
-      r <- filt_real()[, .(real = sum(count, na.rm = TRUE)),
-                       by = .(date, financial_year)]
-      m <- filt_mock()[, .(mock = sum(count, na.rm = TRUE)),
-                       by = .(date, financial_year)]
-      comp <- merge(r, m, by = c("date", "financial_year"), all = TRUE)
-      comp[is.na(real), real := 0L][is.na(mock), mock := 0L]
-      comp[, diff     := mock - real]
-      comp[, pct_diff := fifelse(real > 0L,
-                                  round((mock - real) / real * 100, 1L),
+      q <- filt_qps()[, .(qps = sum(count, na.rm = TRUE)),
+                      by = .(date, financial_year)]
+      c <- filt_cs()[ , .(cs  = sum(count, na.rm = TRUE)),
+                      by = .(date, financial_year)]
+      comp <- merge(q, c, by = c("date", "financial_year"), all = TRUE)
+      comp[is.na(qps), qps := 0L][is.na(cs), cs := 0L]
+      comp[, diff     := cs - qps]
+      comp[, pct_diff := fifelse(qps > 0L,
+                                  round((cs - qps) / qps * 100, 1L),
                                   NA_real_)]
       comp[, month := format(date, "%b %Y")]
       setorder(comp, date)
-      comp[, .(month, financial_year, real, mock, diff, pct_diff)]
+      comp[, .(month, financial_year, qps, cs, diff, pct_diff)]
     })
 
     render_comp <- function(dt, col_names, num_idx, pct_idx) {
@@ -421,19 +421,19 @@ pair_server <- function(id, pair_data = NULL, metric = "Number") {
 
     output$tbl_subgroup <- renderDT(render_comp(
       comp_subgroup(),
-      col_names = c("Subgroup", "Real", "Mock", "Difference", "% Diff"),
+      col_names = c("Subgroup", "QPS", "CS", "Difference", "% Diff"),
       num_idx = 2:4, pct_idx = 5L
     ))
 
     output$tbl_offence <- renderDT(render_comp(
       comp_offence(),
-      col_names = c("Offence", "Subgroup", "Real", "Mock", "Difference", "% Diff"),
+      col_names = c("Offence", "Subgroup", "QPS", "CS", "Difference", "% Diff"),
       num_idx = 3:5, pct_idx = 6L
     ))
 
     output$tbl_monthly <- renderDT(render_comp(
       comp_monthly(),
-      col_names = c("Month", "Financial Year", "Real", "Mock", "Difference", "% Diff"),
+      col_names = c("Month", "Financial Year", "QPS", "CS", "Difference", "% Diff"),
       num_idx = 3:5, pct_idx = 6L
     ))
 

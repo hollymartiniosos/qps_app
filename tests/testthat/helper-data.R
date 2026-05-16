@@ -4,7 +4,7 @@
 library(data.table)
 library(shiny)
 
-# ── Minimal processed data.table (mimics real/mock structure) ─────────────────
+# ── Minimal data.table (mimics QPS / CS structure) ────────────────────────────
 
 make_dt <- function(geo = NULL, demo = NULL, n_months = 6L) {
   dates <- seq(as.Date("2023-07-01"), by = "month", length.out = n_months)
@@ -39,6 +39,6 @@ make_dt <- function(geo = NULL, demo = NULL, n_months = 6L) {
   rows
 }
 
-REAL_DT <- make_dt()
-MOCK_DT <- copy(REAL_DT)
-MOCK_DT[, count := as.integer(round(count * runif(.N, 0.85, 1.15)))]
+QPS_DT <- make_dt()
+CS_DT  <- copy(QPS_DT)
+CS_DT[, count := as.integer(round(count * runif(.N, 0.85, 1.15)))]

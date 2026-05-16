@@ -10,8 +10,8 @@ A Shiny web application that places published Queensland Police Service (QPS) cr
 # 1. Download and process QPS open data (needs internet, ~2–5 min)
 source("R/01_download_and_process.R")
 
-# 2. Generate synthetic CS data
-source("R/02_mock_data.R")
+# 2. Process CS data (currently synthetic — replace with real CS pipeline)
+source("R/02_process_cs_data.R")
 
 # 3. Launch the app
 shiny::runApp("app", launch.browser = TRUE)
@@ -48,13 +48,13 @@ The 18 files cover:
 | Offenders — count | QLD · Region · District · LGA |
 | Victims — count | QLD · Region · District · LGA |
 
-Files are saved to `data/raw/` on first download and reused on subsequent runs (no re-download if the file already exists).
+Files are cached to `data/raw/` and reused on subsequent runs (no re-download if the file already exists).  
+The script cleans and reshapes each file into a tidy long-format table and saves it to `data/qps/<name>.rds`.
 
-The script then cleans and reshapes each file into a tidy long-format table and saves it to `data/processed/<name>.rds`.
+`R/02_process_cs_data.R` reads each QPS file and produces the CS counterpart in `data/cs/<name>.rds`.  
+Currently this generates a synthetic dataset as a development placeholder — replace the logic in this script when real CS source files are available.
 
-`R/02_mock_data.R` reads each processed file and applies statistical perturbation to produce a synthetic CS dataset, saved to `data/mock/<name>_mock.rds`.
-
-Both `data/` folders are git-ignored and stay local.
+All `data/` folders are git-ignored and stay local.
 
 ---
 
@@ -69,13 +69,13 @@ qps_app/
 │   └── modules/
 │       └── pair_module.R       # UI + server module (one instance per dataset pair)
 ├── R/                          # Data preparation scripts
-│   ├── 01_download_and_process.R   # Download from QPS → data/processed/
-│   ├── 02_mock_data.R              # Generate CS data → data/mock/
+│   ├── 01_download_and_process.R   # Download from QPS → data/qps/
+│   ├── 02_process_cs_data.R        # Process CS data → data/cs/
 │   └── hierarchy_map.R             # Offence hierarchy lookup table
 ├── data/                       # Git-ignored — created by the R scripts
-│   ├── raw/
-│   ├── processed/
-│   └── mock/
+│   ├── raw/                    # Raw QPS downloads
+│   ├── qps/                    # Processed QPS data
+│   └── cs/                     # CS data (synthetic placeholder until real data available)
 └── tests/                      # testthat test suite
 ```
 

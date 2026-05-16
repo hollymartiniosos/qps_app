@@ -2,7 +2,7 @@
 # Downloads all 18 QPS crime-statistics datasets and transforms each into a
 # tidy (long) data.table with offence-hierarchy columns attached.
 #
-# Output:  data/processed/<name>.rds   (one data.table per dataset)
+# Output:  data/qps/<name>.rds   (one data.table per dataset)
 # Run from project root:  source("R/01_download_and_process.R")
 
 source("R/hierarchy_map.R")   # also handles package installation
@@ -55,8 +55,8 @@ datasets <- data.table(
 
 # ── Directory setup ────────────────────────────────────────────────────────────
 
-dir.create("data/raw",       recursive = TRUE, showWarnings = FALSE)
-dir.create("data/processed", recursive = TRUE, showWarnings = FALSE)
+dir.create("data/raw", recursive = TRUE, showWarnings = FALSE)
+dir.create("data/qps", recursive = TRUE, showWarnings = FALSE)
 
 
 # ── Known non-offence column names ────────────────────────────────────────────
@@ -284,7 +284,7 @@ for (i in seq_len(nrow(datasets))) {
   message("  Geo cols : ", unique(dt_proc$geo_cols))
   message("  Demo cols: ", unique(dt_proc$demo_cols))
 
-  out_path <- file.path("data/processed", paste0(d$name, ".rds"))
+  out_path <- file.path("data/qps", paste0(d$name, ".rds"))
   saveRDS(dt_proc, out_path)
   message("  Saved -> ", out_path)
 
@@ -315,5 +315,5 @@ if (!is.null(first_ok)) {
   print(review, nrows = Inf)
 }
 
-cat("\nNext step: source('R/02_mock_data.R')\n")
+cat("\nNext step: source('R/02_process_cs_data.R')\n")
 
