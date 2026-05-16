@@ -277,7 +277,7 @@ pair_server <- function(id, pair_data = NULL, metric = "Number") {
 
     y_lab <- if (metric == "Rate") "Rate per 100,000 population" else "Count"
 
-    make_chart <- function(dt, title, fc) {
+    make_chart <- function(dt, title, fc, y_max) {
       if (nrow(dt) == 0L) {
         return(
           plot_ly() %>%
@@ -321,7 +321,8 @@ pair_server <- function(id, pair_data = NULL, metric = "Number") {
         geom_col(width = 20) +
         scale_x_date(date_labels = "%b %y", date_breaks = "2 months") +
         scale_y_continuous(labels = comma,
-                           expand = expansion(mult = c(0, 0.12))) +
+                           limits = c(0, y_max),
+                           expand = expansion(mult = c(0, 0))) +
         scale_fill_manual(values = colors, drop = TRUE, na.value = "#CCCCCC") +
         labs(x = NULL, y = y_lab, fill = NULL) +
         theme_minimal(base_size = 11) +
@@ -353,8 +354,15 @@ pair_server <- function(id, pair_data = NULL, metric = "Number") {
         config(displayModeBar = FALSE)
     }
 
-    output$chart_real <- renderPlotly(make_chart(filt_qps(), "Open QPS Data", fill_col()))
-    output$chart_mock <- renderPlotly(make_chart(filt_cs(),  "CS Data",       fill_col()))
+    shared_y_max <- reactive({
+      fc <- fill_col()
+      tot <- function(dt) dt[, .(total = sum(count, na.rm = TRUE)),
+                              by = c("date", "financial_year")][, max(total, na.rm = TRUE)]
+      max(tot(filt_qps()), tot(filt_cs()), na.rm = TRUE) * 1.12
+    })
+
+    output$chart_real <- renderPlotly(make_chart(filt_qps(), "Open QPS Data", fill_col(), shared_y_max()))
+    output$chart_mock <- renderPlotly(make_chart(filt_cs(),  "CS Data",       fill_col(), shared_y_max()))
 
 
     # ── Comparison tables ------------------------------------------------------
