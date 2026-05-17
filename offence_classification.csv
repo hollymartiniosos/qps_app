@@ -1,5 +1,5 @@
 offence,main_group,subgroup,is_subtotal
-Arson,Offences Against Property,Arson,TRUE
+Arson,Offences Against Property,Arson,FALSE
 Fraud,Offences Against Property,Fraud,TRUE
 Fraud by Cheque,Offences Against Property,Fraud,FALSE
 Fraud by Computer,Offences Against Property,Fraud,FALSE
@@ -12,7 +12,7 @@ Possess Property Suspected Stolen,Offences Against Property,Handling Stolen Good
 Possess etc. Tainted Property,Offences Against Property,Handling Stolen Goods,FALSE
 Receiving Stolen Property,Offences Against Property,Handling Stolen Goods,FALSE
 Offences Against Property,Offences Against Property,Offences Against Property,TRUE
-Other Property Damage,Offences Against Property,Other Property Damage,TRUE
+Other Property Damage,Offences Against Property,Other Property Damage,FALSE
 Other Stealing,Offences Against Property,Other Theft (excl. Unlawful Entry),FALSE
 Other Theft (excl. Unlawful Entry),Offences Against Property,Other Theft (excl. Unlawful Entry),TRUE
 Shop Stealing,Offences Against Property,Other Theft (excl. Unlawful Entry),FALSE
@@ -24,13 +24,13 @@ Unlawful Entry With Intent - Shop,Offences Against Property,Unlawful Entry,FALSE
 Unlawful Entry With Violence - Dwelling,Offences Against Property,Unlawful Entry,FALSE
 Unlawful Entry Without Violence - Dwelling,Offences Against Property,Unlawful Entry,FALSE
 Unlawful Entry,Offences Against Property,Unlawful Entry,TRUE
-Unlawful Use of Motor Vehicle,Offences Against Property,Unlawful Use of Motor Vehicle,TRUE
+Unlawful Use of Motor Vehicle,Offences Against Property,Unlawful Use of Motor Vehicle,FALSE
 Common Assault',Offences Against the Person,Assault,FALSE
 Grievous Assault,Offences Against the Person,Assault,FALSE
 Serious Assault,Offences Against the Person,Assault,FALSE
 Serious Assault (Other),Offences Against the Person,Assault,FALSE
 Assault,Offences Against the Person,Assault,TRUE
-Homicide (Murder),Offences Against the Person,Homicide (Murder),TRUE
+Homicide (Murder),Offences Against the Person,Homicide (Murder),FALSE
 Attempted Murder,Offences Against the Person,Other Homicide,FALSE
 Conspiracy to Murder,Offences Against the Person,Other Homicide,FALSE
 Driving Causing Death,Offences Against the Person,Other Homicide,FALSE
@@ -50,7 +50,7 @@ Robbery,Offences Against the Person,Robbery,TRUE
 Other Sexual Offences,Offences Against the Person,Sexual Offences,FALSE
 Rape and Attempted Rape,Offences Against the Person,Sexual Offences,FALSE
 Sexual Offences,Offences Against the Person,Sexual Offences,TRUE
-Breach Domestic Violence Protection Order,Other Offences,Breach of DVO,TRUE
+Breach Domestic Violence Protection Order,Other Offences,Breach of DVO,FALSE
 Other Drug Offences,Other Offences,Drug Offences,FALSE
 Possess Drugs,Other Offences,Drug Offences,FALSE
 Produce Drugs,Other Offences,Drug Offences,FALSE
@@ -63,7 +63,7 @@ Public Nuisance,Other Offences,Good Order Offences,FALSE
 Public Soliciting,Other Offences,Good Order Offences,FALSE
 Resist Incite Hinder Obstruct Police,Other Offences,Good Order Offences,FALSE
 Good Order Offences,Other Offences,Good Order Offences,TRUE
-Liquor (excl. Drunkenness),Other Offences,Liquor Offences (excl. Drunkenness),TRUE
+Liquor (excl. Drunkenness),Other Offences,Liquor Offences (excl. Drunkenness),FALSE
 Advertising Prostitution,Other Offences,Miscellaneous Offences,FALSE
 Found in Places Used for Purpose of Prostitution Offences,Other Offences,Miscellaneous Offences,FALSE
 Gaming Racing & Betting Offences,Other Offences,Miscellaneous Offences,FALSE
@@ -83,7 +83,7 @@ Disqualified Driving,Other Offences,Traffic and Related Offences,FALSE
 Drink Driving,Other Offences,Traffic and Related Offences,FALSE
 Interfere with Mechanism of Motor Vehicle,Other Offences,Traffic and Related Offences,FALSE
 Traffic and Related Offences,Other Offences,Traffic and Related Offences,TRUE
-Trespassing and Vagrancy,Other Offences,Trespassing and Vagrancy,TRUE
+Trespassing and Vagrancy,Other Offences,Trespassing and Vagrancy,FALSE
 Bomb Possess and/or use of,Other Offences,Weapons Act Offences,FALSE
 Possess and/or use other weapons; restricted items,Other Offences,Weapons Act Offences,FALSE
 Unlawful Possess Concealable Firearm,Other Offences,Weapons Act Offences,FALSE
